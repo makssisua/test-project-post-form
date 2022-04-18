@@ -1,23 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import { PostForm } from "./component/postForm";
+import "./App.scss"
+import "./modal/modal.scss"
+import axios from "axios";
+
+import { Modal } from "./modal/modal";
+import { useState } from "react";
 
 function App() {
+  const url = "https://postman-echo.com/post"
+  const [showModal, setShowModal] = useState(false)
+  const [data, setData] = useState({
+    name: "",
+    format: "",
+    email: "",
+    date: ""
+  })
+
+  const handleSendReport = () => {
+
+    axios.post(url, {
+      name: data.name,
+      format: data.format,
+      email: data.email,
+      date: data.date
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert("Success")
+        }
+      }, (e) => {
+        console.log(e, 'error!')
+        alert("Denied")
+      })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="container">
+        <button
+          onClick={() => setShowModal(true)}
+          type="button"
+          className="btn btn-secondary"
         >
-          Learn React
-        </a>
-      </header>
+          Send Report
+        </button>
+      </div>
+
+      <Modal
+        title="Export Report"
+        onClose={() => setShowModal(false)}
+        show={showModal}
+        onSend={() => handleSendReport()}
+      >
+        <PostForm data={data} setData={setData} />
+      </Modal>
+
     </div>
   );
 }
