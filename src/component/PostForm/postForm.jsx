@@ -1,38 +1,37 @@
 import React, { useState } from "react";
-import "./postForm.scss"
+import "./postForm.scss";
 
 export const PostForm = ({data, setData}) => {
   const [dateCombine, setDateCombine] = useState({
     name: "",
     firstValue: "",
     secondValue: ""
-  })
-  console.log(data ,dateCombine)
+  });
 
-  const [schedule , setSchedule] = useState('')
+  const [schedule , setSchedule] = useState('');
 
   const handle = (e) => {
-    const newData = { ...data }
-    newData[e.target.name] = e.target.value
-    setData(newData)
-  }
+    const newData = { ...data };
+    newData[e.target.name] = e.target.value;
+    setData(newData);
+  };
 
   const handelCombineData = (e) => {
-    const newDateCombine = {...dateCombine }
-    const newData = { ...data }
+    const newDateCombine = {...dateCombine };
+    const newData = { ...data };
 
-    newDateCombine[e.target.id] = e.target.value
-    newDateCombine.name = e.target.name
-    let combine = `${newDateCombine.name} ${newDateCombine.firstValue} at ${newDateCombine.secondValue}`
+    newDateCombine[e.target.id] = e.target.value;
+    newDateCombine.name = e.target.name;
+    let combine = `${newDateCombine.name} ${newDateCombine.firstValue} at ${newDateCombine.secondValue}`;
 
     if (newDateCombine.secondValue === "") {
-      combine = `${newDateCombine.name} ${newDateCombine.firstValue}`
-    }
+      combine = `${newDateCombine.name} ${newDateCombine.firstValue}`;
+    };
 
-    setDateCombine(newDateCombine)
+    setDateCombine(newDateCombine);
 
-    newData.date = combine
-    setData(newData)
+    newData.date = combine;
+    setData(newData);
   }
 
   const handleSchedule = (e) => {
@@ -41,15 +40,13 @@ export const PostForm = ({data, setData}) => {
       firstValue: "",
       secondValue: ""
     }
-    const dataDateDefault = {...data}
-    dataDateDefault.date = ""
+    const dataDateDefault = {...data};
+    dataDateDefault.date = "";
 
-    setSchedule(e.target.value)
-    setDateCombine(dateDefault)
-    setData(dataDateDefault)
+    setSchedule(e.target.value);
+    setDateCombine(dateDefault);
+    setData(dataDateDefault);
   }
-
-  const handleSendReport = () => console.log(data)
 
  const renderSwitch = () => {
     switch(schedule) {
@@ -142,10 +139,10 @@ export const PostForm = ({data, setData}) => {
               type="radio"
               id="FormatChoice1"
               name="format"
-              value="Exel"
+              value="Excel"
               onClick={(e => handle(e))}
             />
-            <label className="radioName" htmlFor="FormatChoice1">Exel</label>
+            <label className="radioName" htmlFor="FormatChoice1">Excel</label>
               <input
                 type="radio"
                 id="FormatChoice2"

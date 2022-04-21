@@ -1,23 +1,22 @@
-import { PostForm } from "./component/postForm";
-import "./App.scss"
-import "./modal/modal.scss"
+import { PostForm } from "../postForm";
+import "./App.scss";
+import "../../../modal/modal.scss";
 import axios from "axios";
 
-import { Modal } from "./modal/modal";
+import { Modal } from "../../../modal/modal";
 import { useState } from "react";
 
 function App() {
-  const url = "https://postman-echo.com/post"
-  const [showModal, setShowModal] = useState(false)
+  const url = "https://postman-echo.com/post";
+  const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     name: "",
     format: "",
     email: "",
     date: ""
-  })
+  });
 
   const handleSendReport = () => {
-
     axios.post(url, {
       name: data.name,
       format: data.format,
@@ -26,13 +25,14 @@ function App() {
     })
       .then(res => {
         if (res.status === 200) {
-          alert("Success")
+          alert("Success");
         }
       }, (e) => {
-        console.log(e, 'error!')
-        alert("Denied")
+        console.log(e, 'error!');
+        alert("Denied");
       })
-  }
+  };
+
 
   return (
     <div className="App">
